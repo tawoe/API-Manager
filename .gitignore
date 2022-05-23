@@ -1,7 +1,7 @@
 *.swp
 __pycache__/
 
-apimanager/apimanager/local_settings.py
+apimanager/apimanager/local_settings*
 .idea
 API-Manager.iml
 apimanager/.DS_Store
