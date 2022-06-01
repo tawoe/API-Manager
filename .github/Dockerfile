@@ -5,6 +5,10 @@ RUN dnf  install python3-psycopg2 -y
 ADD . /app
 COPY ./.github/local_settings_container.py /app/apimanager/apimanager/local_settings.py
 RUN pip install -r /app/requirements.txt
+RUN mkdir /logs
+RUN touch /logs/gunicorn.access.log
+RUN touch /logs/gunicorn.error.log
+RUN chgrp -R 0 /logs && chmod -R g+rwX /logs
 USER 501
 WORKDIR /app/apimanager
 EXPOSE 8000
