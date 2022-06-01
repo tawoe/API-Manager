@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/ubi9/python-39
+FROM registry.access.redhat.com/ubi9/python-39
 USER root
 RUN dnf update -y
 RUN dnf  install python3-psycopg2 -y
