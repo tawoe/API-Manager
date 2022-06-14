@@ -1,6 +1,6 @@
 import os
 
-
+print("enter localsettings")
 if 'OAUTH_CONSUMER_KEY' in os.environ:
 	OAUTH_CONSUMER_KEY = os.environ['OAUTH_CONSUMER_KEY']
 if 'OAUTH_CONSUMER_SECRET' in os.environ:
