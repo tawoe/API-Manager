@@ -13,5 +13,6 @@ if 'API_PORTAL' in os.environ:
 	API_PORTAL = os.environ['API_PORTAL']
 if 'ALLOWED_HOSTS' in os.environ:
 	ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(',')
+	print(ALLOWED_HOSTS)
 if 'VERIFY' in os.environ:
 	VERIFY = os.environ['VERIFY']
