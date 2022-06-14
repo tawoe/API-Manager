@@ -9,7 +9,6 @@ RUN mkdir /logs
 RUN touch /logs/gunicorn.access.log
 RUN touch /logs/gunicorn.error.log
 RUN chgrp -R 0 /logs && chmod -R g+rwX /logs
-RUN chgrp -R 0 /app && chmod -R g+rwX /app
 USER 501
 WORKDIR /app/apimanager
 EXPOSE 8000
