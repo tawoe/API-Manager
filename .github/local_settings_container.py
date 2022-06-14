@@ -1,18 +1,10 @@
 import os
 
-print("enter localsettings")
-if 'OAUTH_CONSUMER_KEY' in os.environ:
-	OAUTH_CONSUMER_KEY = os.environ['OAUTH_CONSUMER_KEY']
-if 'OAUTH_CONSUMER_SECRET' in os.environ:
-	OAUTH_CONSUMER_SECRET = os.environ['OAUTH_CONSUMER_SECRET']
-if 'SECRET_KEY' in os.environ:
-	SECRET_KEY = os.environ['SECRET_KEY']
-if 'API_HOST' in os.environ:
-	API_HOST = os.environ['API_HOST']
-if 'API_PORTAL' in os.environ:
-	API_PORTAL = os.environ['API_PORTAL']
-if 'ALLOWED_HOSTS' in os.environ:
-	ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(',')
-	print(ALLOWED_HOSTS)
-if 'VERIFY' in os.environ:
-	VERIFY = os.environ['VERIFY']
+
+OAUTH_CONSUMER_KEY = os.environ['OAUTH_CONSUMER_KEY']
+OAUTH_CONSUMER_SECRET = os.environ['OAUTH_CONSUMER_SECRET']
+SECRET_KEY = os.environ['SECRET_KEY']
+API_HOST = os.environ['API_HOST']
+API_PORTAL = os.environ['API_PORTAL']
+ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(',')
+
