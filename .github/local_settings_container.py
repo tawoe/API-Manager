@@ -1,10 +1,16 @@
 import os
 
+if os.getenv('OAUTH_CONSUMER_KEY'):
+	OAUTH_CONSUMER_KEY = os.getenv('OAUTH_CONSUMER_KEY')
+if os.getenv('OAUTH_CONSUMER_SECRET'):
+	OAUTH_CONSUMER_SECRET = os.getenv('OAUTH_CONSUMER_SECRET')
+if os.getenv('SECRET_KEY'):
+	SECRET_KEY = os.getenv('SECRET_KEY')
+if os.getenv('API_HOST'):
+	API_HOST = os.getenv('API_HOST')
+if os.getenv('API_PORTAL'):
+	API_PORTAL = os.getenv('API_PORTAL')
+if os.getenv('ALLOWED_HOSTS'):
+	ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
-OAUTH_CONSUMER_KEY = os.environ['OAUTH_CONSUMER_KEY']
-OAUTH_CONSUMER_SECRET = os.environ['OAUTH_CONSUMER_SECRET']
-SECRET_KEY = os.environ['SECRET_KEY']
-API_HOST = os.environ['API_HOST']
-API_PORTAL = os.environ['API_PORTAL']
-ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(',')
 
