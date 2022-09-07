@@ -14,7 +14,6 @@ from obp.api import API, APIError
 from .forms import AddEntitlementForm,CreateInvitationForm
 import csv
 
-
 class FilterRoleName(BaseFilter):
     """Filter users by role names"""
     filter_type = 'role_name'
@@ -248,7 +247,9 @@ class MyDetailView(LoginRequiredMixin, FormView):
             messages.error(self.request, err)
         except Exception as err:
             messages.error(self.request, 'Unknown Error')
-
+        #print(user,"This is ")
+        #entitlements=user["entitlements"]["list"]
+        user["entitlements"]["list"] = sorted(user["entitlements"]["list"], key=lambda d: d['role_name'])
         context.update({
             'apiuser': user,  # 'user' is logged-in user in template context
         })
@@ -367,18 +368,32 @@ class UserStatusUpdateView(LoginRequiredMixin, View):
                 else:
                     msg = 'User with ID {} has been deleted.'.format(kwargs['user_id'])
                     messages.success(request, msg)
-            else:
-                urlpath = '/users/{}/lock-status'.format(kwargs['username'])
-                result = api.put(urlpath, None)
+            elif(request.POST.get("Lock")):
+                urlpath = '/users/{}/locks'.format(kwargs['username'])
+                result = api.post(urlpath, None)
                 if result is not None and 'code' in result and result['code'] >= 400:
                     messages.error(request, result['message'])
                 else:
+                    msg = 'User {} has been lock.'.format(kwargs['username'])
+                    messages.success(request, msg)
+            else:
+                urlpath = '/users/{}/lock-status'.format(kwargs['username'])
+                result = api.put(urlpath, None)
+                print("result", result)
+                #if result is not None and 'code' in result and result['code'] >= 400:
+                if 'code' in result and result['code'] == 404:
                     msg = 'User {} has been unlocked.'.format(kwargs['username'])
                     messages.success(request, msg)
+                else:
+                    messages.error(request, result['message'])
+                #else:
+                #    msg = 'User {} has been unlocked.'.format(kwargs['username'])
+                #    messages.success(request, msg)
+
         except APIError as err:
             messages.error(request, err)
-        except:
-            messages.error(self.request, 'Unknown Error')
+        except Exception as e:
+            messages.error(self.request, 'Unknown Error' + str(e))
 
         # from sonarcloud: Change this code to not perform redirects based on user-controlled data.
         redirect_url_from_gui = request.POST.get('next', reverse('users-index'))
@@ -403,25 +418,23 @@ class ExportCsvView(LoginRequiredMixin, View):
         username = self.request.GET.get('username')
         lockedstatus = self.request.GET.get('locked_status')
         if lockedstatus is None: lockedstatus = "active"
-
         if email:
             urlpath = '/users/email/{}/terminator'.format(email)
         elif username:
             urlpath = '/users/username/{}'.format(username)
         else:
             urlpath = '/users?limit={}&offset={}&locked_status={}'.format(limit, offset, lockedstatus)
-
         try:
             response = api.get(urlpath)
             if 'code' in response and response['code'] >= 400:
                 messages.error(self.request, response['message'])
             else:
                 users = response['users']
+
         except APIError as err:
             messages.error(self.request, err)
         except:
             messages.error(self.request, 'Unknown Error')
-      
         response = HttpResponse(content_type = 'text/csv')
         response['Content-Disposition'] = 'attachment;filename= Users'+ str(datetime.datetime.now())+'.csv'
         writer = csv.writer(response)

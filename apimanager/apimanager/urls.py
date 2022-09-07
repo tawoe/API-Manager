@@ -15,23 +15,23 @@ from obp.views import (
 )
 
 urlpatterns = [
+    #These pages URLs have no GUI
+    url(r'^oauth/initiate$',
+        OAuthInitiateView.as_view(), name='oauth-initiate'),
+    url(r'^oauth/authorize$',
+            OAuthAuthorizeView.as_view(), name='oauth-authorize'),
+    url(r'^directlogin$',
+            DirectLoginView.as_view(), name='directlogin'),
+    url(r'^gatewaylogin$',
+            GatewayLoginView.as_view(), name='gatewaylogin'),
     # Defining authentication URLs here and not including oauth.urls for
     # backward compatibility
 ]
 urlpatterns += i18n_patterns(
 #urlpatterns = (
     url(r'^$', HomeView.as_view(), name="home"),
-
-    url(r'^oauth/initiate$',
-        OAuthInitiateView.as_view(), name='oauth-initiate'),
     url(r'^single-sign-on',
         OAuthInitiateView.as_view(), name='single-sign-on'),
-    url(r'^oauth/authorize$',
-        OAuthAuthorizeView.as_view(), name='oauth-authorize'),
-    url(r'^directlogin$',
-        DirectLoginView.as_view(), name='directlogin'),
-    url(r'^gatewaylogin$',
-        GatewayLoginView.as_view(), name='gatewaylogin'),
     url(r'^logout$',
         LogoutView.as_view(), name='oauth-logout'),
     url(r'^consumers/', include('consumers.urls')),
@@ -39,11 +39,13 @@ urlpatterns += i18n_patterns(
     url(r'^users/', include('users.urls')),
     url(r'^branches/', include('branches.urls')),
     url(r'^atms/', include('atms.urls')),
+    url(r'^atm-detail/', include('atmdetail.urls')),
     url(r'^customers/', include('customers.urls')),
     url(r'^metrics/', include('metrics.urls')),
     url(r'^config/', include('config.urls')),
     url(r'^webui/', include('webui.urls')),
     url(r'^methodrouting/', include('methodrouting.urls')),
+    url(r'^connectormethod/', include('connectormethod.urls')),
     url(r'^dynamicendpoints/', include('dynamicendpoints.urls')),
     url(r'^apicollections/', include('apicollections.urls')),
 )

@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -5,18 +6,17 @@ from django.shortcuts import render
 """
 Views of atms app
 """
-
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 import json
 from django.urls import reverse_lazy
 from django.views.generic import FormView
-
 from obp.api import API, APIError
-
 from .forms import CreateAtmForm
+from django.utils.translation import ugettext_lazy as _
 
 class IndexAtmsView(LoginRequiredMixin, FormView):
+
     """Index view for ATMs"""
     template_name = "atms/index.html"
     form_class = CreateAtmForm
@@ -33,12 +33,12 @@ class IndexAtmsView(LoginRequiredMixin, FormView):
         fields = form.fields
         try:
             fields['bank_id'].choices = self.api.get_bank_id_choices()
-            fields['is_accessible'].choices = [('','Choose...'),(True, True), (False, False)]
-            fields['has_deposit_capability'].choices = [('','Choose...'),(True, True), (False, False)]
-            fields['supported_languages'].choices = [('','Choose...'),("en", "en"), ("fr", "fr"), ("de", "de")]
-            fields['notes'].choices = [('','Choose...'),("String1", "String1"), ("String2", "String2")]
-            fields['supported_currencies'].choices = [('','Choose...'),("EUR", "EUR"), ("MXN", "MXN"), ("USD", "USD")]
-            fields['location_categories'].choices = [('','Choose...'),("ATBI", "ATBI"), ("ATBE", "ATBE")]
+            fields['is_accessible'].choices = [('',_('Choose...')),(True, True), (False, False)]
+            fields['has_deposit_capability'].choices = [('',_('Choose...')),(True, True), (False, False)]
+            fields['supported_languages'].choices = [('',_('Choose...')),("en", "en"), ("fr", "fr"), ("de", "de")]
+            fields['notes'].choices = [('',_('Choose...')),("String1", "String1"), ("String2", "String2")]
+            fields['supported_currencies'].choices = [('',_('Choose...')),("EUR", "EUR"), ("MXN", "MXN"), ("USD", "USD")]
+            fields['location_categories'].choices = [('',_('Choose...')),("ATBI", "ATBI"), ("ATBE", "ATBE")]
             fields['lobby'].initial = json.dumps({
                             "monday": [
                                 {
@@ -180,49 +180,6 @@ class IndexAtmsView(LoginRequiredMixin, FormView):
         messages.success(self.request, msg)
         return super(IndexAtmsView, self).form_valid(form)
 
-    """def get_banks(self):
-        api = API(self.request.session.get('obp'))
-        try:
-            urlpath = '/banks'
-            result = api.get(urlpath)
-            if 'banks' in result:
-                return [bank['id'] for bank in sorted(result['banks'], key=lambda d: d['id'])]
-            else:
-                return []
-        except APIError as err:
-            messages.error(self.request, err)
-            return []
-
-    def get_atms(self, context):
-
-        api = API(self.request.session.get('obp'))
-        try:
-            self.bankids = self.get_banks()
-            atms_list = []
-            for bank_id in self.bankids:
-                urlpath = '/banks/{}/atms'.format(bank_id)
-                result = api.get(urlpath)
-                #print(result)
-                if 'atms' in result:
-                    atms_list.extend(result['atms'])
-        except APIError as err:
-            messages.error(self.request, err)
-            return []
-        except Exception as inst:
-            messages.error(self.request, "Unknown Error {}".format(type(inst).__name__))
-            return []
-
-        return atms_list
-
-    def get_context_data(self, **kwargs):
-        context = super(IndexAtmsView, self).get_context_data(**kwargs)
-        atms_list = self.get_atms(context)
-        context.update({
-            'atms_list': atms_list,
-            'bankids': self.bankids
-        })
-        return context"""
-
 class UpdateAtmsView(LoginRequiredMixin, FormView):
     template_name = "atms/update.html"
     success_url = '/atms/'
@@ -281,9 +238,9 @@ class UpdateAtmsView(LoginRequiredMixin, FormView):
             else:
                 fields['supported_languages'].choices = [("de", "de"),("fr", "fr"), ("en", "en")]
             fields['supported_languages'].initial = result['supported_languages']
-            if result['supported_currencies'][0].lower()=='eur':
+            if result['supported_currencies'][0].lower()=='EUR':
                   fields['supported_currencies'].choices = [("EUR", "EUR"), ("MXN", "MXN"), ("USD", "USD")]
-            elif result['supported_currencies'][0].lower()=='mxn':
+            elif result['supported_currencies'][0].lower()=='MXN':
                   fields['supported_currencies'].choices = [("MXN", "MXN"), ("EUR", "EUR"), ("USD", "USD")]
             else:
                   fields['supported_currencies'].choices = [("USD", "USD"),("MXN", "MXN"), ("EUR", "EUR")]
@@ -393,46 +350,3 @@ class UpdateAtmsView(LoginRequiredMixin, FormView):
         })
         return context
 
-class atmListView(IndexAtmsView, LoginRequiredMixin, FormView ):
-    template_name = "atms/atm_List.html"
-    success_url = '/atms/'
-    def get_banks(self):
-                api = API(self.request.session.get('obp'))
-                try:
-                    urlpath = '/banks'
-                    result = api.get(urlpath)
-                    if 'banks' in result:
-                        return [bank['id'] for bank in sorted(result['banks'], key=lambda d: d['id'])]
-                    else:
-                        return []
-                except APIError as err:
-                    messages.error(self.request, err)
-                    return []
-
-    def get_atms(self, context):
-            api = API(self.request.session.get('obp'))
-            try:
-                self.bankids = self.get_banks()
-                atms_list = []
-                for bank_id in self.bankids:
-                    urlpath = '/banks/{}/atms'.format(bank_id)
-                    result = api.get(urlpath)
-                    #print(result)
-                    if 'atms' in result:
-                        atms_list.extend(result['atms'])
-            except APIError as err:
-                messages.error(self.request, err)
-                return []
-            except Exception as inst:
-                messages.error(self.request, "Unknown Error {}".format(type(inst).__name__))
-                return []
-
-            return atms_list
-    def get_context_data(self, **kwargs):
-            context = super(IndexAtmsView, self).get_context_data(**kwargs)
-            atms_list = self.get_atms(context)
-            context.update({
-                'atms_list': atms_list,
-                'bankids': self.bankids
-            })
-            return context
