@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 # -*- coding: utf-8 -*-
 """
-Views of atms app
+Views of customer list app
 """
 import datetime
 from django.contrib import messages
@@ -12,15 +12,15 @@ import json
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.views.generic import FormView,TemplateView, View
-from atms.views import IndexAtmsView
+from customers.views import CreateView
 from obp.api import API, APIError
 import csv
 
 
 
-class AtmListView(IndexAtmsView, LoginRequiredMixin, FormView ):
-    template_name = "atmsView/atmdetail.html"
-    success_url = '/atmsView/'
+class CustomerListView(CreateView, LoginRequiredMixin, FormView ):
+    template_name = "customerlist/customerlist.html"
+    success_url = '/customers/list'
     def get_banks(self):
                 api = API(self.request.session.get('obp'))
                 try:
@@ -34,17 +34,18 @@ class AtmListView(IndexAtmsView, LoginRequiredMixin, FormView ):
                     messages.error(self.request, err)
                     return []
 
-    def get_atms(self, context):
+    def get_customers(self, context):
+
             api = API(self.request.session.get('obp'))
             try:
                 self.bankids = self.get_banks()
-                atms_list = []
-                for bank_id in self.bankids:
-                    urlpath = '/banks/{}/atms'.format(bank_id)
-                    result = api.get(urlpath)
-                    #print(result)
-                    if 'atms' in result:
-                        atms_list.extend(result['atms'])
+                customers_list = []
+                #for bank_id in self.bankids:
+                urlpath = '/customers'
+                #urlpath = 'http://127.0.0.1:8080/obp/v4.0.0/my/customers'
+                result = api.get(urlpath)
+                if 'customers' in result:
+                    customers_list.extend(result['customers'])
             except APIError as err:
                 messages.error(self.request, err)
                 return []
@@ -52,12 +53,12 @@ class AtmListView(IndexAtmsView, LoginRequiredMixin, FormView ):
                 messages.error(self.request, "Unknown Error {}".format(type(inst).__name__))
                 return []
 
-            return atms_list
+            return customers_list
     def get_context_data(self, **kwargs):
-            context = super(IndexAtmsView, self).get_context_data(**kwargs)
-            atms_list = self.get_atms(context)
+            context = super(CreateView, self).get_context_data(**kwargs)
+            customers_list = self.get_customers(context)
             context.update({
-                'atms_list': atms_list,
+                'customers_list': customers_list,
                 'bankids': self.bankids
             })
             return context
@@ -79,25 +80,23 @@ class ExportCsvView(LoginRequiredMixin, View):
        api = API(self.request.session.get('obp'))
        try:
            self.bankids = self.get_banks()
-           atms_list = []
+           customers_list = []
            for bank_id in self.bankids:
-               urlpath = '/banks/{}/atms'.format(bank_id)
+               urlpath = '/banks/{}/customers'.format(bank_id)
                result = api.get(urlpath)
-               #print(result)
-               if 'atms' in result:
-                   atms_list.extend(result['atms'])
+               if 'customers' in result:
+                   customers_list.extend(result['customers'])
        except APIError as err:
            messages.error(self.request, err)
        except Exception as inst:
            messages.error(self.request, "Unknown Error {}".format(type(inst).__name__))
        response = HttpResponse(content_type = 'text/csv')
-       response['Content-Disposition'] = 'attachment;filename= Atms'+ str(datetime.datetime.now())+'.csv'
+       response['Content-Disposition'] = 'attachment;filename= Customers'+ str(datetime.datetime.now())+'.csv'
        writer = csv.writer(response)
-       writer.writerow(["id","name","notes","line_1","line_2","line_3","city", "county", "state", "postcode","country_code", "longitude","latitude","more_info"])
+       writer.writerow(["bank_id","customer_id","customer_number","legal_name","mobile_phone_number","email","face_image", "url", "date", "date_of_birth","relationship_status", "dependants","dob_of_dependants","employment_status"])
        for user in atms_list:
-          writer.writerow([user['id'],user['name'], user['notes'], user["address"]['line_1'], user["address"]['line_2'],
-                             user["address"]['line_3'], user["address"]['city'], user["address"]['county'], user["address"]['state'], user["address"]['postcode'], user["address"]['country_code'], user["location"]['longitude'], user["location"]['latitude'], user['more_info']])
+          writer.writerow([user['bank_id'],user['customer_id'], user['customer_number'], user["legal_name"],
+                             user["mobile_phone_number"], user["email"], user["face_image"]['url'], user["face_image"]['date'], user["date_of_birth"], user['relationship_status'], user["dependants"], user["dob_of_dependants"], user['employment_status']])
        return response
 
-       #print(atms_list)
 

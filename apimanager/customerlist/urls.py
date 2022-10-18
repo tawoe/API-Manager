@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-URLs for metrics app
+URLs for customer list app
 """
 
 from django.conf.urls import url
-from .views import AtmListView, ExportCsvView
+from .views import CustomerListView, ExportCsvView
 
 urlpatterns = [
     url(r'^$',
-        AtmListView.as_view(),
-        name='atm-detail'),
+        CustomerListView.as_view(),
+        name='customer-list'),
     url(r'^export_csv$',
             ExportCsvView.as_view(),
             name='export-csv')

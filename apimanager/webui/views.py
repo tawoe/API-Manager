@@ -35,21 +35,9 @@ class IndexView(LoginRequiredMixin, FormView):
                 messages.error(self.request, response['message'])
                 context.update({'webui_props': []})
             else:
-                # Here is response of getWebuiProps.
-                # {
-                #     "webui_props": [
-                #         {
-                #             "name": "webui_header_logo_left_url ",
-                #             "value": " /media/images/logo.png",
-                #             "web_ui_props_id": "default"
-                #         }
-                #     ]
-                # }
                 context.update(response)
         except APIError as err:
-            messages.error(self.request, Exception("The OBP-API server is not running or does not respond properly."
-                                                   "Please check OBP-API server.    "
-                                                   "Details: " + str(err)))
+            messages.error(self.request, err)
         except BaseException as err:
             messages.error(self.request, (Exception("Unknown Error. Details:" + str(err))))
         return context
@@ -65,6 +53,7 @@ def webui_save(request):
     urlpath = '/management/webui_props'
     web_ui_props_name = request.POST.get('web_ui_props_name')
     web_ui_props_value = request.POST.get('web_ui_props_value')
+    #print("web_ui_props_name", request.get)
     payload = {
         'name': web_ui_props_name,
         'value': web_ui_props_value

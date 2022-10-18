@@ -20,7 +20,7 @@ class IndexAtmsView(LoginRequiredMixin, FormView):
     """Index view for ATMs"""
     template_name = "atms/index.html"
     form_class = CreateAtmForm
-    success_url = reverse_lazy('atms_list')
+    success_url = reverse_lazy('atms_create')
 
     def dispatch(self, request, *args, **kwargs):
         self.api = API(request.session.get('obp'))
@@ -104,6 +104,7 @@ class IndexAtmsView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         try:
             data = form.cleaned_data
+            print(data, "This is a data")
             urlpath = '/banks/{}/atms'.format(data['bank_id'])
             payload ={
                 "id": data["atm_id"],
@@ -182,7 +183,7 @@ class IndexAtmsView(LoginRequiredMixin, FormView):
 
 class UpdateAtmsView(LoginRequiredMixin, FormView):
     template_name = "atms/update.html"
-    success_url = '/atms/'
+    success_url = '/atms/list'
     form_class = CreateAtmForm
 
     def dispatch(self, request, *args, **kwargs):
@@ -335,7 +336,7 @@ class UpdateAtmsView(LoginRequiredMixin, FormView):
         except Exception as e:
             messages.error(self.request, e)
             return super(UpdateAtmsView, self).form_invalid(form)
-        msg = 'Atm {} for Bank {} has been created successfully!'.format(  # noqa
+        msg = 'Atm {} for Bank {} has been updated successfully!'.format(  # noqa
             data["atm_id"], data["bank_id"])
         messages.success(self.request, msg)
         return super(UpdateAtmsView, self).form_valid(form)

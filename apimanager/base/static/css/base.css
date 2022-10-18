@@ -38,9 +38,10 @@ footer a:hover, .footer a:focus {
 
 
 .navbar-default {
-	top: 89px;
+	top: 0px;
 	background-color: #53c4ef;
 	border: none;
+
 }
 
 
@@ -191,16 +192,6 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
 	margin-top: 89px;
 }
 
-#logo-left{
-	height: 50px;
-	margin-top: 30px;
-	margin-bottom: 30px;
-}
-
-#left-logo img{
-	height:40px;
-}
-
 .navbar-btn .btn-default {
 	font-size: 16px;
 	text-align: center;
@@ -208,4 +199,17 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
 	border-radius: 0;
 	padding: 9px 20px 11px;
 	border: 1px solid #333333;
+	display:inline-block;
+}
+
+.button-select {
+    margin-top:8px;
+    margin-left:25rem
+}
+
+.language-select {
+    text-decoration: none;
+    color:#fff;
+    cursor:pointer;
+    margin-left:5rem;
 }

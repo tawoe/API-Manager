@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = None
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 
@@ -48,16 +48,18 @@ INSTALLED_APPS = [
     'bootstrap3',
     'bootstrap_datepicker_plus',
     'mathfilters',
-
     'base',
     'obp',
     'consumers',
     'users',
     'branches',
     'atms',
-    'atmdetail',
+    'atmlist',
+    'products',
+    'productlist',
     'entitlementrequests',
     'customers',
+    'customerlist',
     'metrics',
     'config',
     'webui',
@@ -172,6 +174,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+# Set this to your local directory for static files
+STATIC_ROOT = os.path.join(BASE_DIR, '..', '..', 'static-collected')
 
 from django.utils.translation import gettext_lazy as _
 
@@ -185,8 +189,7 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, "locale/"),
 )
 
-# Set this to your local directory for static files
-STATIC_ROOT = os.path.join(BASE_DIR, '..', '..', 'static-collected')
+
 
 
 LOGGING = {
@@ -249,11 +252,12 @@ API_HOST = 'http://127.0.0.1:8080'
 # Only override this if you have a separate portal instance
 API_PORTAL = API_HOST
 API_BASE_PATH = '/obp/v'
-API_VERSION = '4.0.0'
+API_VERSION = '5.0.0'
 
 # URL to API Tester
 API_TESTER_URL = 'https://www.example.com'
-SHOW_API_TESTER = True
+SHOW_API_TESTER = False
+
 
 # Always save session$
 SESSION_SAVE_EVERY_REQUEST = True
@@ -269,10 +273,11 @@ OAUTH_CONSUMER_SECRET = None
 
 # Path on API_HOST to DirectLogin
 DIRECTLOGIN_PATH = '/my/logins/direct'
+ALLOW_DIRECT_LOGIN = True
 
 # Set to true if the API is connected to a core banking system
 GATEWAYLOGIN_HAS_CBS = False
-
+ALLOW_GATEWAY_LOGIN = True
 
 # Use BOOTSTRAP3 if you are using Bootstrap 3
 BOOTSTRAP4 = {

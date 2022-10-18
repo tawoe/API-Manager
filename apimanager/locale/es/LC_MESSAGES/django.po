@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-06 11:49+0200\n"
+"POT-Creation-Date: 2022-09-29 14:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,254 +47,236 @@ msgstr "Describir el propósito de la colección"
 #: connectormethod/templates/connectormethod/index.html:73
 #: customers/templates/customers/create.html:185
 #: dynamicendpoints/templates/dynamicendpoints/index.html:33
-#: users/templates/users/invitation.html:65
+#: users/templates/users/invitation.html:65 webui/templates/webui/index.html:53
 msgid "Create"
 msgstr "Creada"
 
 #: apicollections/templates/apicollections/index.html:72
 #: dynamicendpoints/templates/dynamicendpoints/index.html:40
 #: methodrouting/templates/methodrouting/index.html:129
-#: users/templates/users/detail.html:112 webui/templates/webui/index.html:47
+#: users/templates/users/detail.html:112 webui/templates/webui/index.html:46
 msgid "Delete"
 msgstr "Eliminar"
 
-#: apimanager/settings.py:179
+#: apimanager/settings.py:181
 msgid "English"
 msgstr "Inglés"
 
-#: apimanager/settings.py:180
+#: apimanager/settings.py:182
 msgid "French"
 msgstr "francés"
 
-#: apimanager/settings.py:181
+#: apimanager/settings.py:183
 msgid "Spanish"
 msgstr "español"
 
-#: atmdetail/forms.py:14 atmdetail/templates/atmsView/atmdetail.html:11
-#: atms/forms.py:14 atms/templates/atms/atm_list.html:8
+#: atmlist/templates/atmlist/atmlist.html:2
+#: atmlist/templates/atmlist/atmlist.html:4 base/templates/base.html:70
+msgid "ATM List"
+msgstr "Vista de Cajeros Automáticos"
+
+#: atmlist/templates/atmlist/atmlist.html:6
+#: productlist/templates/productlist/productlist.html:6
+#: users/templates/users/includes/filter_pagination.html:12
+msgid "Export CSV"
+msgstr "Exportar CSV"
+
+#: atmlist/templates/atmlist/atmlist.html:11 atms/forms.py:14
 msgid "ATM Id"
 msgstr "ID del cajero automático"
 
-#: atmdetail/forms.py:25 atmdetail/templates/atmsView/atmdetail.html:12
-#: atms/forms.py:25 atms/templates/atms/atm_list.html:9
+#: atmlist/templates/atmlist/atmlist.html:12 atms/forms.py:25
 #: branches/templates/branches/index.html:161
+#: productlist/templates/productlist/productlist.html:12
 #: users/templates/users/detail.html:97
 #: users/templates/users/invitation.html:22
 msgid "Bank Id"
 msgstr "Id del banco"
 
-#: atmdetail/forms.py:35 atms/forms.py:35 branches/forms.py:33
-#: consumers/templates/consumers/index.html:58
-msgid "Name"
-msgstr "Nombre"
-
-#: atmdetail/forms.py:38 atms/forms.py:38
-msgid "The name of the ATM"
-msgstr "La configuración de la API"
-
-#: atmdetail/forms.py:46 atmdetail/templates/atmsView/atmdetail.html:27
-#: atms/forms.py:46 atms/templates/atms/atm_list.html:25 branches/forms.py:43
-#: branches/templates/branches/index.html:176
-#: branches/templates/branches/index.html:203
-msgid "Address"
-msgstr "Dirección"
-
-#: atmdetail/forms.py:56 atms/forms.py:56 branches/forms.py:53
-msgid "Latitude"
-msgstr "Latitud"
-
-#: atmdetail/forms.py:67 atms/forms.py:67 branches/forms.py:64
-msgid "Longitude"
-msgstr "Longitud"
-
-#: atmdetail/forms.py:78 atms/forms.py:78
-msgid "Meta License Id"
-msgstr "Meta Licencia"
-
-#: atmdetail/forms.py:89 atms/forms.py:89
-msgid "Meta License Name"
-msgstr "Nombre de la Licencia"
-
-#: atmdetail/forms.py:100 atms/forms.py:100
-msgid "Opening Hours"
-msgstr "Horario de atención"
-
-#: atmdetail/forms.py:110 atms/forms.py:110
-msgid "Monday"
-msgstr "Lunes"
-
-#: atmdetail/forms.py:120 atms/forms.py:120
-msgid "Tuesday"
-msgstr "Martes"
-
-#: atmdetail/forms.py:130 atms/forms.py:130
-msgid "Wednesday"
-msgstr "Wednesday"
-
-#: atmdetail/forms.py:140 atms/forms.py:140
-msgid "Thursday"
-msgstr "Jueves"
-
-#: atmdetail/forms.py:150 atms/forms.py:150
-msgid "Friday"
-msgstr "Viernes"
-
-#: atmdetail/forms.py:160 atms/forms.py:160
-msgid "Saturday"
-msgstr "Sábado"
-
-#: atmdetail/forms.py:170 atms/forms.py:170
-msgid "Sunday"
-msgstr "Sunday"
-
-#: atmdetail/forms.py:180 atms/forms.py:180
-msgid "Is Accessible"
-msgstr "Producción y validación es"
-
-#: atmdetail/forms.py:189 atms/forms.py:189
-msgid "ATM location"
-msgstr "Ubicación"
-
-#: atmdetail/forms.py:199 atms/forms.py:199 branches/forms.py:166
-msgid "More information"
-msgstr "Más información"
-
-#: atmdetail/forms.py:202 atms/forms.py:202 branches/forms.py:169
-msgid "short walk to the lake from here"
-msgstr "corto paseo hasta el lago desde aquí"
-
-#: atmdetail/forms.py:209 atms/forms.py:209
-msgid "Deposit Capabilities"
-msgstr "Tiene capacidad de depósito"
-
-#: atmdetail/forms.py:218 atms/forms.py:218
-msgid "Supported Languages"
-msgstr "Idiomas admitidos"
-
-#: atmdetail/forms.py:227 atms/forms.py:227
-msgid "Services"
-msgstr "Servicios"
-
-#: atmdetail/forms.py:230 atms/forms.py:230
-msgid "Service store"
-msgstr "Servicios"
-
-#: atmdetail/forms.py:237 atms/forms.py:237 branches/forms.py:146
-#: branches/templates/branches/index.html:209
-msgid "Accessible Features"
-msgstr "Características accesibles"
-
-#: atmdetail/forms.py:240 atms/forms.py:240
-msgid "wheelchair, atm usuable by the visually impaired"
-msgstr "Rollstuhl, für Sehbehinderte nutzbar"
-
-#: atmdetail/forms.py:247 atms/forms.py:247
-msgid "Supported Currencies"
-msgstr "Divisas Soportadas"
-
-#: atmdetail/forms.py:256 atms/forms.py:256
-msgid "Write Notes"
-msgstr "Notas:"
-
-#: atmdetail/forms.py:265 atms/forms.py:265
-msgid "Write location Category"
-msgstr "Categorías de ubicación"
-
-#: atmdetail/forms.py:274 atms/forms.py:274
-msgid "Minimum Withdrawal"
-msgstr "El retiro mínimo"
-
-#: atmdetail/forms.py:284 atms/forms.py:284
-msgid "Branch Identification"
-msgstr "Identificación de la sucursal"
-
-#: atmdetail/forms.py:287 atms/forms.py:287
-msgid "Enter your Branch Identification"
-msgstr "Identificación de la sucursal"
-
-#: atmdetail/forms.py:294 atms/forms.py:294
-msgid "Site Identification"
-msgstr "IDENTIFICACIÓN DEL LUGAR"
-
-#: atmdetail/forms.py:297 atms/forms.py:297
-msgid "Enter your Site Identification"
-msgstr "IDENTIFICACIÓN DEL LUGAR"
-
-#: atmdetail/forms.py:304 atms/forms.py:304
-msgid "Site Name"
-msgstr "Nobre del sitio"
-
-#: atmdetail/forms.py:307 atms/forms.py:307
-msgid "Enter your Site Name "
-msgstr "Nobre del sitio"
-
-#: atmdetail/forms.py:314 atms/forms.py:314
-msgid "Cash Withdrawal National fee"
-msgstr "Cargo Nacional por Retiro de Efectivo"
-
-#: atmdetail/forms.py:317 atms/forms.py:317
-msgid "Cash withdrawal national fee"
-msgstr "Cargo Nacional por Retiro de Efectivo"
-
-#: atmdetail/forms.py:324 atms/forms.py:324
-msgid "Cash Withdrawal international fee"
-msgstr "Cargo internacional por retiro de efectivo"
-
-#: atmdetail/forms.py:327 atms/forms.py:327
-msgid "Cash withdrawal international fee"
-msgstr "Cargo internacional por retiro de efectivo"
-
-#: atmdetail/forms.py:334 atmdetail/forms.py:337 atms/forms.py:334
-#: atms/forms.py:337
-msgid "Balance Inquiry Fee"
-msgstr "Cargo por consulta de saldo"
-
-#: atmdetail/templates/atmsView/atmdetail.html:2 base/templates/base.html:11
-msgid "API Manager"
-msgstr "Administrador de API"
-
-#: atmdetail/templates/atmsView/atmdetail.html:2 base/templates/base.html:85
-msgid "ATMs Detail"
-msgstr "Descripción"
-
-#: atmdetail/templates/atmsView/atmdetail.html:4
-msgid "ATMs List"
-msgstr "Vista de Cajeros Automáticos"
-
-#: atmdetail/templates/atmsView/atmdetail.html:6
-#: users/templates/users/includes/filter_pagination.html:12
-msgid "Export CSV"
-msgstr "Exportar CSV"
-
-#: atmdetail/templates/atmsView/atmdetail.html:13
-#: atms/templates/atms/atm_list.html:10
+#: atmlist/templates/atmlist/atmlist.html:13
 msgid "ATM Name"
 msgstr "Nombre del cajero automático"
 
-#: atmdetail/templates/atmsView/atmdetail.html:14
-#: atms/templates/atms/atm_list.html:11
+#: atmlist/templates/atmlist/atmlist.html:14
+#: productlist/templates/productlist/productlist.html:14
 msgid "More info"
 msgstr "Más información"
 
-#: atmdetail/templates/atmsView/atmdetail.html:36
-#: atms/templates/atms/atm_list.html:63
+#: atmlist/templates/atmlist/atmlist.html:27 atms/forms.py:46
+#: branches/forms.py:43 branches/templates/branches/index.html:176
+#: branches/templates/branches/index.html:203
+#: productlist/templates/productlist/productlist.html:27
+msgid "Address"
+msgstr "Dirección"
+
+#: atmlist/templates/atmlist/atmlist.html:36
 #: consumers/templates/consumers/index.html:76
+#: productlist/templates/productlist/productlist.html:36
 #: users/templates/users/index.html:69
 msgid "View"
 msgstr "Ver"
 
-#: atms/templates/atms/atm_list.html:4 atms/templates/atms/update.html:4
-msgid "ATM Detail"
-msgstr "Descripción"
+#: atms/forms.py:35 branches/forms.py:33
+#: consumers/templates/consumers/index.html:58
+msgid "Name"
+msgstr "Nombre"
 
-#: atms/templates/atms/atm_list.html:12
-#: branches/templates/branches/index.html:164
-msgid "Update Button"
-msgstr "Botón Actualizar"
+#: atms/forms.py:38
+msgid "The name of the ATM"
+msgstr "La configuración de la API"
 
-#: atms/templates/atms/index.html:3 base/templates/base.html:84
-msgid "ATMs"
-msgstr "Cajeros Automáticos"
+#: atms/forms.py:56 branches/forms.py:53
+msgid "Latitude"
+msgstr "Latitud"
+
+#: atms/forms.py:67 branches/forms.py:64
+msgid "Longitude"
+msgstr "Longitud"
+
+#: atms/forms.py:78
+msgid "Meta License Id"
+msgstr "Meta Licencia"
+
+#: atms/forms.py:89
+msgid "Meta License Name"
+msgstr "Nombre de la Licencia"
+
+#: atms/forms.py:100
+msgid "Opening Hours"
+msgstr "Horario de atención"
+
+#: atms/forms.py:110
+msgid "Monday"
+msgstr "Lunes"
+
+#: atms/forms.py:120
+msgid "Tuesday"
+msgstr "Martes"
+
+#: atms/forms.py:130
+msgid "Wednesday"
+msgstr "Wednesday"
+
+#: atms/forms.py:140
+msgid "Thursday"
+msgstr "Jueves"
+
+#: atms/forms.py:150
+msgid "Friday"
+msgstr "Viernes"
+
+#: atms/forms.py:160
+msgid "Saturday"
+msgstr "Sábado"
+
+#: atms/forms.py:170
+msgid "Sunday"
+msgstr "Sunday"
+
+#: atms/forms.py:180
+msgid "Is Accessible"
+msgstr "Producción y validación es"
+
+#: atms/forms.py:189
+msgid "ATM location"
+msgstr "Ubicación"
+
+#: atms/forms.py:199 branches/forms.py:166
+msgid "More information"
+msgstr "Más información"
+
+#: atms/forms.py:202 branches/forms.py:169
+msgid "short walk to the lake from here"
+msgstr "corto paseo hasta el lago desde aquí"
+
+#: atms/forms.py:209
+msgid "Deposit Capabilities"
+msgstr "Tiene capacidad de depósito"
+
+#: atms/forms.py:218
+msgid "Supported Languages"
+msgstr "Idiomas admitidos"
+
+#: atms/forms.py:227
+msgid "Services"
+msgstr "Servicios"
+
+#: atms/forms.py:230
+msgid "Service store"
+msgstr "Servicios"
+
+#: atms/forms.py:237 branches/forms.py:146
+#: branches/templates/branches/index.html:209
+msgid "Accessible Features"
+msgstr "Características accesibles"
+
+#: atms/forms.py:240
+msgid "wheelchair, atm usuable by the visually impaired"
+msgstr "Rollstuhl, für Sehbehinderte nutzbar"
+
+#: atms/forms.py:247
+msgid "Supported Currencies"
+msgstr "Divisas Soportadas"
+
+#: atms/forms.py:256
+msgid "Write Notes"
+msgstr "Notas:"
+
+#: atms/forms.py:265
+msgid "Write location Category"
+msgstr "Categorías de ubicación"
+
+#: atms/forms.py:274
+msgid "Minimum Withdrawal"
+msgstr "El retiro mínimo"
+
+#: atms/forms.py:284
+msgid "Branch Identification"
+msgstr "Identificación de la sucursal"
+
+#: atms/forms.py:287
+msgid "Enter your Branch Identification"
+msgstr "Identificación de la sucursal"
+
+#: atms/forms.py:294
+msgid "Site Identification"
+msgstr "IDENTIFICACIÓN DEL LUGAR"
+
+#: atms/forms.py:297
+msgid "Enter your Site Identification"
+msgstr "IDENTIFICACIÓN DEL LUGAR"
+
+#: atms/forms.py:304
+msgid "Site Name"
+msgstr "Nobre del sitio"
+
+#: atms/forms.py:307
+msgid "Enter your Site Name "
+msgstr "Nobre del sitio"
+
+#: atms/forms.py:314
+msgid "Cash Withdrawal National fee"
+msgstr "Cargo Nacional por Retiro de Efectivo"
+
+#: atms/forms.py:317
+msgid "Cash withdrawal national fee"
+msgstr "Cargo Nacional por Retiro de Efectivo"
+
+#: atms/forms.py:324
+msgid "Cash Withdrawal international fee"
+msgstr "Cargo internacional por retiro de efectivo"
+
+#: atms/forms.py:327
+msgid "Cash withdrawal international fee"
+msgstr "Cargo internacional por retiro de efectivo"
+
+#: atms/forms.py:334 atms/forms.py:337
+msgid "Balance Inquiry Fee"
+msgstr "Cargo por consulta de saldo"
+
+#: atms/templates/atms/index.html:3 base/templates/base.html:69
+msgid "ATM Create"
+msgstr "Creada"
 
 #: atms/templates/atms/index.html:250
 #: branches/templates/branches/index.html:151
@@ -302,33 +284,37 @@ msgstr "Cajeros Automáticos"
 msgid "Add"
 msgstr "Agregar"
 
+#: atms/templates/atms/update.html:4
+msgid "ATM Detail"
+msgstr "Descripción"
+
 #: atms/views.py:36 atms/views.py:37 atms/views.py:38 atms/views.py:39
 #: atms/views.py:40 atms/views.py:41
 msgid "Choose..."
 msgstr "Seleccione..."
 
-#: base/templates/base.html:29
-msgid "Logout"
-msgstr "Cerrar la sesión"
+#: base/templates/base.html:11
+msgid "API Manager"
+msgstr "Administrador de API"
 
-#: base/templates/base.html:48
+#: base/templates/base.html:35
 msgid "Home"
 msgstr "Inicio"
 
-#: base/templates/base.html:50 consumers/templates/consumers/index.html:10
+#: base/templates/base.html:37 consumers/templates/consumers/index.html:10
 msgid "Consumers"
 msgstr "Consumidores"
 
-#: base/templates/base.html:52
+#: base/templates/base.html:39
 #: entitlementrequests/templates/entitlementrequests/index.html:8
 msgid "Entitlement Requests"
 msgstr "Solicitudes de derechos"
 
-#: base/templates/base.html:57 users/templates/users/index.html:8
+#: base/templates/base.html:42 users/templates/users/index.html:8
 msgid "Users"
 msgstr "Usuarios"
 
-#: base/templates/base.html:59
+#: base/templates/base.html:44
 #: consumers/templates/consumers/includes/filter_apptype.html:4
 #: consumers/templates/consumers/includes/filter_enabled.html:4
 #: consumers/templates/consumers/includes/filter_time.html:7
@@ -337,87 +323,108 @@ msgstr "Usuarios"
 msgid "All"
 msgstr "Todos"
 
-#: base/templates/base.html:60
+#: base/templates/base.html:46
 msgid "My User"
 msgstr "Mi usuaria"
 
-#: base/templates/base.html:61 users/templates/users/invitation.html:8
+#: base/templates/base.html:48 users/templates/users/invitation.html:8
 msgid "Invite Developer"
 msgstr "Invitar a desarrollador"
 
-#: base/templates/base.html:68
+#: base/templates/base.html:53
 msgid "Metrics"
 msgstr "Métrica"
 
-#: base/templates/base.html:70 metrics/templates/metrics/api.html:9
+#: base/templates/base.html:55 metrics/templates/metrics/api.html:9
 msgid "API Metrics"
 msgstr "Métricas de la API"
 
-#: base/templates/base.html:71 metrics/templates/metrics/connector.html:9
+#: base/templates/base.html:57 metrics/templates/metrics/connector.html:9
 msgid "Connector Metrics"
 msgstr "Métricas del conector"
 
-#: base/templates/base.html:72
+#: base/templates/base.html:59
 msgid "KPI Dashboard"
 msgstr "Panel de KPI"
 
-#: base/templates/base.html:80
+#: base/templates/base.html:64
 msgid "Resources"
 msgstr "Recursos"
 
-#: base/templates/base.html:82 customers/templates/customers/create.html:5
+#: base/templates/base.html:66 customers/templates/customers/create.html:5
 msgid "Customers"
 msgstr "Consumidores"
 
-#: base/templates/base.html:83 branches/templates/branches/index.html:9
+#: base/templates/base.html:68 branches/templates/branches/index.html:9
 msgid "Branches"
 msgstr "Sucursales"
 
-#: base/templates/base.html:95
+#: base/templates/base.html:71
+#: productlist/templates/productlist/productlist.html:2
+#: productlist/templates/productlist/productlist.html:4
+msgid "Product List"
+msgstr "Produkt Liste"
+
+#: base/templates/base.html:76
 msgid "Configurations"
 msgstr "Configuraciones"
 
-#: base/templates/base.html:97 config/templates/config/index.html:8
+#: base/templates/base.html:78 config/templates/config/index.html:8
 msgid "Config"
 msgstr "Configuraciones"
 
-#: base/templates/base.html:98
+#: base/templates/base.html:80
 msgid "Webui Props"
 msgstr "Accesorios webui"
 
-#: base/templates/base.html:99
+#: base/templates/base.html:82
 msgid "Method Routings"
 msgstr "Enrutamiento de métodos"
 
-#: base/templates/base.html:100
+#: base/templates/base.html:84
 #: connectormethod/templates/connectormethod/detail.html:6
 #: connectormethod/templates/connectormethod/index.html:6
 msgid "Connector Methods"
 msgstr "Métricas del conector"
 
-#: base/templates/base.html:101
+#: base/templates/base.html:86
 #: dynamicendpoints/templates/dynamicendpoints/index.html:7
 msgid "Dynamic Endpoints"
 msgstr "Puntos finales dinámicos"
 
-#: base/templates/base.html:102
+#: base/templates/base.html:89
 msgid "My API Collections"
 msgstr "Mis colecciones de API"
+
+#: base/templates/base.html:94
+msgid "API Tester"
+msgstr "Métricas de la API"
+
+#: base/templates/base.html:100
+msgid "Logout"
+msgstr "Cerrar la sesión"
 
 #: base/templates/home.html:5
 msgid "Welcome to API Manager"
 msgstr "Bienvenido al Administrador de API"
 
-#: base/templates/home.html:9
-msgid ""
-"This app gives you access to management functionality for the OBP instance at"
+#: base/templates/home.html:9 base/templates/home.html:13
+msgid "API Manager allows you to manage some aspects of the OBP instance at "
 msgstr ""
-"Esta aplicación le brinda acceso a la funcionalidad de administración para "
-"la instancia de OBP en"
+"El Gestor de la API le permite gestionar algunos aspectos de la instancia "
+"OBP en"
 
 #: base/templates/home.html:9
-msgid "You have to"
+msgid "You have to "
 msgstr "Tienes que"
+
+#: base/templates/home.html:9
+msgid "login"
+msgstr "inicio de sesión"
+
+#: base/templates/home.html:9
+msgid "or"
+msgstr "Hora"
 
 #: base/templates/home.html:9
 msgid "register"
@@ -428,12 +435,20 @@ msgid "an account before being able to proceed"
 msgstr "una cuenta antes de poder continuar"
 
 #: base/templates/home.html:9
-msgid ""
-"The logged-in user needs to have specific roles granted to use the "
-"functionality."
-msgstr ""
-"El usuario que inició sesión debe tener roles específicos otorgados para "
-"usar la funcionalidad."
+msgid "Your access is limited by the Entitlements you have."
+msgstr "Su acceso está limitado por los derechos que tiene."
+
+#: base/templates/home.html:19
+msgid "Authenticate"
+msgstr "Autentificar"
+
+#: base/templates/home.html:23 obp/api.py:170 obp/api.py:178
+msgid "Choose ..."
+msgstr "Seleccione..."
+
+#: base/templates/home.html:36
+msgid "Proceed to authentication server"
+msgstr "Weiter zum Authentifizierungsserver"
 
 #: branches/forms.py:13 branches/templates/branches/index.html:160
 msgid "Branch Id"
@@ -511,6 +526,10 @@ msgstr "Nombre de la sucursal"
 #: branches/templates/branches/index.html:163
 msgid "More_info"
 msgstr "Más información"
+
+#: branches/templates/branches/index.html:164
+msgid "Update Button"
+msgstr "Botón Actualizar"
 
 #: branches/templates/branches/index.html:178
 msgid "line1"
@@ -763,6 +782,7 @@ msgstr "Identificación"
 #: entitlementrequests/templates/entitlementrequests/index.html:31
 #: entitlementrequests/templates/entitlementrequests/index.html:32
 #: users/templates/users/detail.html:98 users/templates/users/index.html:60
+#: webui/templates/webui/index.html:15
 msgid "Action"
 msgstr "Acción"
 
@@ -785,7 +805,7 @@ msgstr "Nombre_juridico"
 #: customers/forms.py:62 users/forms.py:67 users/templates/users/detail.html:16
 #: users/templates/users/index.html:59 users/templates/users/invitation.html:71
 msgid "Email"
-msgstr "Correo electrónico"
+msgstr "Correo Electrónico"
 
 #: customers/forms.py:65
 msgid "E.g. person@example.com"
@@ -861,7 +881,7 @@ msgstr "Último día"
 
 #: customers/templates/customers/create.html:10
 msgid "Create Customer"
-msgstr "Crear cliente"
+msgstr "Crear Cliente"
 
 #: dynamicendpoints/templates/dynamicendpoints/index.html:10
 msgid "ENDPOINT ID"
@@ -1341,57 +1361,8 @@ msgstr "Tiempo de Respuesta Promedio(ms)"
 #: metrics/templates/metrics/yearly_summary.html:108
 msgid "Median time from consumer registration to first API call"
 msgstr ""
-"Mediana de tiempo desde el registro del consumidor hasta la primera llamada "
-"APIMediana de tiempo desde el registro del consumidor hasta la primera "
-"llamada APITiempo medio desde el registro del consumidor hasta la primera "
-"llamada a la APITiempo medio desde el registro del consumidor hasta la "
-"primera llamada a la APIMediana de tiempo desde el registro del consumidor "
-"hasta la primera llamada APIMediana de tiempo desde el registro del "
-"consumidor hasta la primera llamada APIMediana de tiempo desde el registro "
-"del consumidor hasta la primera llamada APIMediana de tiempo desde el "
-"registro del consumidor hasta la primera llamada APIMediana de tiempo desde "
-"el registro del consumidor hasta la primera llamada APIMediana de tiempo "
-"desde el registro del consumidor hasta la primera llamada APIMediana de "
-"tiempo desde el registro del consumidor hasta la primera llamada APIMediana "
-"de tiempo desde el registro del consumidor hasta la primera llamada "
-"APIMediana de tiempo desde el registro del consumidor hasta la primera "
-"llamada APIMediana de tiempo desde el registro del consumidor hasta la "
-"primera llamada APIMediana de tiempo desde el registro del consumidor hasta "
-"la primera llamada APIMediana de tiempo desde el registro del consumidor "
-"hasta la primera llamada APITiempo medio desde el registro del consumidor "
-"hasta la primera llamada a la APITiempo medio desde el registro del "
-"consumidor hasta la primera llamada a la APITiempo medio desde el registro "
-"del consumidor hasta la primera llamada a la APITiempo medio desde el "
-"registro del consumidor hasta la primera llamada a la APITiempo medio desde "
-"el registro del consumidor hasta la primera llamada a la APITiempo medio "
-"desde el registro del consumidor hasta la primera llamada a la APITiempo "
-"medio desde el registro del consumidor hasta la primera llamada a la "
-"APITiempo medio desde el registro del consumidor hasta la primera llamada a "
-"la APITiempo medio desde el registro del consumidor hasta la primera llamada "
-"a la APItiempo medio hasta la primeratiempo medio hasta la primeratiempo "
-"medio hasta la primeratiempo medio hasta la primeratiempo medio hasta la "
-"primeratiempo medio hasta la primeratiempo medio hasta la primeratiempo "
-"medio hasta la primeratiempo medio hasta la primeratiempo medio hasta la "
-"primeratiempo medio hasta la primeraMediana de tiempo desde el registro del "
-"consumidor hasta la primera llamada APIMediana de tiempo desde el registro "
-"del consumidor hasta la primera llamada APIMediana de tiempo desde el "
-"registro del consumidor hasta la primera llamada APIMediana de tiempo desde "
-"el registro del consumidor hasta la primera llamada APIMediana de tiempo "
-"desde el registro del consumidor hasta la primera llamada APIMediana de "
-"tiempo desde el registro del consumidor hasta la primera llamada APIMediana "
-"de tiempo desde el registro del consumidor hasta la primera llamada "
-"APIMediana de tiempo desde el registro del consumidor hasta la primera "
-"llamada APIMediana de tiempo desde el registro del consumidor hasta la "
-"primera llamada APIMediana de tiempo desde el registro del consumidor hasta "
-"la primera llamada APIMediana de tiempo desde el registro del consumidor "
-"hasta la primera llamada APIMediana de tiempo desde el registro del "
-"consumidor hasta la primera llamada APIMediana de tiempo desde el registro "
-"del consumidor hasta la primera llamada APIMediana de tiempo desde el "
-"registro del consumidor hasta la primera llamada APIMediana de tiempo desde "
-"el registro del consumidor hasta la primera llamada APIMediana de tiempo "
-"desde el registro del consumidor hasta la primera llamada APIMediana de "
-"tiempo desde el registro del consumidor hasta la primera llamada APIMediana "
-"de tiempo desde el registro del consumidor hasta la primera llamada "
+"Mittlere Zeit von der Registrierung des Verbrauchers bis zum ersten API-"
+"Aufruf"
 
 #: metrics/templates/metrics/custom_summary.html:109
 #: metrics/templates/metrics/daily_summary.html:112
@@ -1492,60 +1463,8 @@ msgstr "Número promedio de llamadas"
 #: metrics/templates/metrics/weekly_summary.html:115
 msgid "Apps with distinct developer email addresses"
 msgstr ""
-"Aplicaciones con distintas direcciones de correo electrónico para "
-"desarrolladoresAplicaciones con distintas direcciones de correo electrónico "
-"para desarrolladoresAplicaciones con direcciones de correo electrónico de "
-"desarrollador distintasAplicaciones con direcciones de correo electrónico de "
-"desarrollador distintasAplicaciones con distintas direcciones de correo "
-"electrónico para desarrolladoresAplicaciones con distintas direcciones de "
-"correo electrónico para desarrolladoresAplicaciones con distintas "
-"direcciones de correo electrónico para desarrolladoresAplicaciones con "
-"distintas direcciones de correo electrónico para desarrolladoresAplicaciones "
-"con distintas direcciones de correo electrónico para "
-"desarrolladoresAplicaciones con distintas direcciones de correo electrónico "
-"para desarrolladoresAplicaciones con distintas direcciones de correo "
-"electrónico para desarrolladoresAplicaciones con distintas direcciones de "
-"correo electrónico para desarrolladoresAplicaciones con distintas "
-"direcciones de correo electrónico para desarrolladoresAplicaciones con "
-"distintas direcciones de correo electrónico para desarrolladoresAplicaciones "
-"con distintas direcciones de correo electrónico para "
-"desarrolladoresAplicaciones con distintas direcciones de correo electrónico "
-"para desarrolladoresAplicaciones con direcciones de correo electrónico de "
-"desarrollador distintasAplicaciones con direcciones de correo electrónico de "
-"desarrollador distintasAplicaciones con direcciones de correo electrónico de "
-"desarrollador distintasAplicaciones con direcciones de correo electrónico de "
-"desarrollador distintasAplicaciones con direcciones de correo electrónico de "
-"desarrollador distintasAplicaciones con direcciones de correo electrónico de "
-"desarrollador distintasAplicaciones con direcciones de correo electrónico de "
-"desarrollador distintasAplicaciones con direcciones de correo electrónico de "
-"desarrollador distintasAplicaciones con direcciones de correo electrónico de "
-"desarrollador distintasDirecciones de correo electrónicoDirecciones de "
-"correo electrónicoDirecciones de correo electrónicoDirecciones de correo "
-"electrónicoDirecciones de correo electrónicoDirecciones de correo "
-"electrónicoDirecciones de correo electrónicoDirecciones de correo "
-"electrónicoDirecciones de correo electrónicoDirecciones de correo "
-"electrónicoDirecciones de correo electrónicoAplicaciones con distintas "
-"direcciones de correo electrónico para desarrolladoresAplicaciones con "
-"distintas direcciones de correo electrónico para desarrolladoresAplicaciones "
-"con distintas direcciones de correo electrónico para "
-"desarrolladoresAplicaciones con distintas direcciones de correo electrónico "
-"para desarrolladoresAplicaciones con distintas direcciones de correo "
-"electrónico para desarrolladoresAplicaciones con distintas direcciones de "
-"correo electrónico para desarrolladoresAplicaciones con distintas "
-"direcciones de correo electrónico para desarrolladoresAplicaciones con "
-"distintas direcciones de correo electrónico para desarrolladoresAplicaciones "
-"con distintas direcciones de correo electrónico para "
-"desarrolladoresAplicaciones con distintas direcciones de correo electrónico "
-"para desarrolladoresAplicaciones con distintas direcciones de correo "
-"electrónico para desarrolladoresAplicaciones con distintas direcciones de "
-"correo electrónico para desarrolladoresAplicaciones con distintas "
-"direcciones de correo electrónico para desarrolladoresAplicaciones con "
-"distintas direcciones de correo electrónico para desarrolladoresAplicaciones "
-"con distintas direcciones de correo electrónico para "
-"desarrolladoresAplicaciones con distintas direcciones de correo electrónico "
-"para desarrolladoresAplicaciones con distintas direcciones de correo "
-"electrónico para desarrolladoresAplicaciones con distintas direcciones de "
-"correo electrónico para "
+"Aplicaciones con distintas direcciones de correo electrónico de los "
+"desarrolladores"
 
 #: metrics/templates/metrics/hourly_summary.html:20
 msgid "Hour"
@@ -1585,6 +1504,16 @@ msgstr "Maximo de llamadas por día"
 #: metrics/templates/metrics/yearly_summary.html:95
 msgid "Calls per month"
 msgstr "llamadas por mes"
+
+#: productlist/templates/productlist/productlist.html:11
+msgid "Product Code"
+msgstr ""
+
+#: productlist/templates/productlist/productlist.html:13
+#, fuzzy
+#| msgid "Function Name"
+msgid "Product Name"
+msgstr "Nombre de la función"
 
 #: users/forms.py:15 users/templates/users/detail.html:67
 #: users/templates/users/detail.html:96
@@ -1671,10 +1600,8 @@ msgid "Entitlements"
 msgstr "Derechos"
 
 #: users/templates/users/includes/filter_email.html:8
-#, fuzzy
-#| msgid "Distinct developer email addresses"
 msgid "Enter email address ..."
-msgstr "Distintas direcciones de correo electrónico para desarrolladores"
+msgstr "Introduzca la dirección de correo electrónico ..."
 
 #: users/templates/users/includes/filter_locked.html:2
 msgid "Active"
@@ -1690,10 +1617,8 @@ msgid "All Roles"
 msgstr "Todas las Funciones"
 
 #: users/templates/users/includes/filter_username.html:8
-#, fuzzy
-#| msgid "username"
 msgid "Enter username ..."
-msgstr "nombre de usuario"
+msgstr "Introduzca el nombre de usuario ..."
 
 #: users/templates/users/index.html:11
 msgid "Filters"
@@ -1713,7 +1638,7 @@ msgstr "Identificación de usuario"
 
 #: users/templates/users/invitation.html:45
 msgid "email"
-msgstr "Email"
+msgstr "Correo Electrónico"
 
 #: users/templates/users/invitation.html:52
 #: users/templates/users/invitation.html:72
@@ -1729,29 +1654,44 @@ msgstr "Países"
 msgid "status"
 msgstr "Estado"
 
-#: webui/templates/webui/index.html:9
+#: webui/templates/webui/index.html:4
 msgid "WEBUI"
 msgstr "WEBUI"
 
-#: webui/templates/webui/index.html:12
+#: webui/templates/webui/index.html:7
 msgid "Web UI Props Name"
 msgstr "Accesorios webui"
 
-#: webui/templates/webui/index.html:15
+#: webui/templates/webui/index.html:11
 msgid "Web UI Props Value"
 msgstr "Accesorios webui"
 
 #: webui/templates/webui/index.html:18
-msgid "Web UI Props Id"
+msgid "Props Id"
 msgstr "Accesorios webui"
 
-#: webui/templates/webui/index.html:21
-msgid "Save Value"
-msgstr "Guardar valor"
-
-#: webui/templates/webui/index.html:46
+#: webui/templates/webui/index.html:43
 msgid "Save"
 msgstr "Ahorrar"
+
+#~ msgid "Save Value"
+#~ msgstr "Guardar valor"
+
+#~ msgid "Create Locale"
+#~ msgstr "Creada"
+
+#~ msgid "ATMs Detail"
+#~ msgstr "Descripción"
+
+#~ msgid "ATMs"
+#~ msgstr "Cajeros Automáticos"
+
+#~ msgid ""
+#~ "The logged-in user needs to have specific roles granted to use the "
+#~ "functionality."
+#~ msgstr ""
+#~ "El usuario que inició sesión debe tener roles específicos otorgados para "
+#~ "usar la funcionalidad."
 
 #~ msgid "PDDL"
 #~ msgstr "PDDL"
