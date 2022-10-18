@@ -18,7 +18,6 @@ RUN python ./apimanager/manage.py collectstatic --noinput
 
 FROM registry.access.redhat.com/ubi9/nginx-120
 
-ADD .github/nginx.conf "${NGINX_CONF_PATH}"
 COPY --from=builder /app/apimanager/static/* /opt/app-root/src/
 RUN chgrp -R 0 /opt/app-root/src/ && chmod -R g+rwX /opt/app-root/src/
 
