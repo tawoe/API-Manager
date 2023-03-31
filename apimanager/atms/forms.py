@@ -186,7 +186,7 @@ class CreateAtmForm(forms.Form):
             required=False,
         )
     located_at = forms.CharField(
-        label=_('ATM location'),
+        label=_('ATM Location'),
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'OBP',
@@ -196,7 +196,7 @@ class CreateAtmForm(forms.Form):
         required=False,
     )
     more_info = forms.CharField(
-            label=_('More information'),
+            label=_('More Information'),
             widget=forms.TextInput(
                 attrs={
                     'placeholder': _('short walk to the lake from here'),
@@ -214,9 +214,9 @@ class CreateAtmForm(forms.Form):
              ),
              required=False,
         )
-    supported_languages = forms.ChoiceField(
+    supported_languages = forms.CharField(
             label=_('Supported Languages'),
-            widget=forms.Select(
+            widget=forms.TextInput(
                attrs={
                       'class': 'form-control',
                }
@@ -227,7 +227,7 @@ class CreateAtmForm(forms.Form):
             label=_('Services'),
             widget=forms.TextInput(
                 attrs={
-                    'placeholder': _('Service store'),
+                    'placeholder': _('Services'),
                     'class': 'form-control',
                 }
             ),
@@ -243,28 +243,31 @@ class CreateAtmForm(forms.Form):
         ),
         required=False,
     )
-    supported_currencies = forms.ChoiceField(
+    supported_currencies = forms.CharField( # not be a dropdown
         label=_('Supported Currencies'),
-        widget=forms.Select(
+        widget=forms.TextInput(
             attrs={
+                'placeholder': _('Currency'),
                 'class': 'form-control',
             }
         ),
         required=False,
     )
-    notes = forms.ChoiceField(
-        label=_('Write Notes'),
-        widget=forms.Select(
+    notes = forms.CharField(
+        label=_('Notes'),
+        widget=forms.TextInput(
             attrs={
+               'placeholder': _('Notes'),
                'class': 'form-control',
             }
         ),
         required=False,
     )
-    location_categories = forms.ChoiceField(
-        label=_('Write location Category'),
-        widget=forms.Select(
+    location_categories = forms.CharField(
+        label=_('Location Category'),
+        widget=forms.TextInput(
            attrs={
+              'placeholder': _('Location Category'),
               'class': 'form-control',
            }
         ),
@@ -311,7 +314,7 @@ class CreateAtmForm(forms.Form):
         required=False,
     )
     cash_withdrawal_national_fee = forms.CharField(
-         label=_('Cash Withdrawal National fee'),
+         label=_('Cash Withdrawal National Fee'),
          widget=forms.TextInput(
               attrs={
                      'placeholder': _('Cash withdrawal national fee'),
@@ -321,7 +324,7 @@ class CreateAtmForm(forms.Form):
          required=False,
     )
     cash_withdrawal_international_fee = forms.CharField(
-         label=_('Cash Withdrawal international fee'),
+         label=_('Cash Withdrawal International Fee'),
          widget=forms.TextInput(
               attrs={
                      'placeholder': _('Cash withdrawal international fee'),
