@@ -15,7 +15,6 @@ import os
 from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse_lazy
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = None
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 
@@ -51,10 +50,15 @@ INSTALLED_APPS = [
     'base',
     'obp',
     'consumers',
+    'accounts',
+    'accountlist',
+    'systemviews',
     'users',
     'branches',
     'atms',
     'atmlist',
+    'banks',
+    'banklist',
     'products',
     'productlist',
     'entitlementrequests',
@@ -66,11 +70,13 @@ INSTALLED_APPS = [
     'methodrouting',
     'connectormethod',
     'dynamicendpoints',
-    'apicollections'
+    'apicollections',
+    'apicollectionlist'
 ]
 
 MIDDLEWARE = [
     # 'django.middleware.cache.UpdateCacheMiddleware',
+    'csp.middleware.CSPMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -111,13 +117,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'base.context_processors.api_root',
+                'base.context_processors.api_version_processor',
                 'base.context_processors.api_username',
                 'base.context_processors.api_user_id',
                 'base.context_processors.api_tester_url',
                 'base.context_processors.portal_page',
                 'base.context_processors.logo_url',
-                'base.context_processors.override_css_url'
+                'base.context_processors.override_css_url',
+                'csp.context_processors.nonce'
             ],
         },
     },
@@ -240,19 +247,22 @@ LOGGING = {
 LOGIN_URL = reverse_lazy('home')
 
 #Map Java: yyyy-MM-dd'T'HH:mm'Z'
-API_DATETIMEFORMAT = '%Y-%m-%dT%H:%M:%SZ'
+API_DATE_FORMAT_WITH_SECONDS  = '%Y-%m-%dT%H:%M:%SZ'
 #Map Java: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
-API_DATEFORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
+API_DATE_FORMAT_WITH_MILLISECONDS = '%Y-%m-%dT%H:%M:%S.%fZ'
+
+# the API_Manager the web form datetime format, eg: 2023-11-28 10:49:27
+API_DATE_FORMAT_WITH_DAY_DATE_TIME = '%Y-%m-%d %H:%M:%S'
 
 # the API_Manager the web form date format, eg: 2020-10-11
-API_MANAGER_DATE_FORMAT= '%Y-%m-%d'
+API_DATE_FORMAT_WITH_DAY = '%Y-%m-%d'
+API_FIELD_TIME_FORMAT = '%H-%M-%S'
 
 
 API_HOST = 'http://127.0.0.1:8080'
+API_EXPLORER_HOST = 'http://127.0.0.1:8082'
 # Only override this if you have a separate portal instance
 API_PORTAL = API_HOST
-API_BASE_PATH = '/obp/v'
-API_VERSION = '5.0.0'
 
 # URL to API Tester
 API_TESTER_URL = 'https://www.example.com'
@@ -261,6 +271,16 @@ SHOW_API_TESTER = False
 
 # Always save session$
 SESSION_SAVE_EVERY_REQUEST = True
+
+# Session Cookie Settings
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_AGE = 300
+
+# CSRF Cookie Settings
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SECURE = True
 
 # Paths on API_HOST to OAuth
 OAUTH_TOKEN_PATH = '/oauth/initiate'
@@ -297,21 +317,46 @@ LOGO_URL = 'https://static.openbankproject.com/images/OBP/favicon.png'
 OVERRIDE_CSS_URL = None
 
 VERIFY = True
+CALLBACK_BASE_URL = ""
 
-# Local settings can override anything in here
+# Global
+UNDEFINED = "<undefined>"
+
+# Local settings can replace any value ABOVE
 try:
     from apimanager.local_settings import *     # noqa
 except ImportError:
     pass
-# EVERYTHING BELOW HERE WILL NOT BE OVERWRITTEN BY LOCALSETTINGS!
+# EVERYTHING BELOW HERE WILL *NOT* BE OVERWRITTEN BY LOCALSETTINGS!
 # DO NOT TRY TO DO SO YOU WILL BE IGNORED!
+OBPv500 = API_HOST + '/obp/v5.0.0'
+OBPv510 = API_HOST + '/obp/v5.1.0'
 
-# Settings here might use parts overwritten in local settings
-API_ROOT = API_HOST + API_BASE_PATH + API_VERSION
+# API Versions
+API_VERSION = {
+    "v500": OBPv500,
+    "v510": OBPv510
+}
 # For some reason, swagger is not available at the latest API version
-API_URL_SWAGGER = API_HOST + '/obp/v1.4.0/resource-docs/v' + API_VERSION + '/swagger'  # noqa
+#API_URL_SWAGGER = API_HOST + '/obp/v1.4.0/resource-docs/v' + 5.1.0 + '/swagger'  # noqa
 
 if not OAUTH_CONSUMER_KEY:
     raise ImproperlyConfigured('Missing settings for OAUTH_CONSUMER_KEY')
 if not OAUTH_CONSUMER_SECRET:
     raise ImproperlyConfigured('Missing settings for OAUTH_CONSUMER_SECRET')
+
+#This has been moved to after API_HOST is imported so that connections to the API are allowed by the csp
+# Content Security Policy - External Urls for scripts, styles, and images should be included here
+#TODO these outside scripts should really just be loaded when we run "manage.py collectstatic"
+# Or the whole static folder could be uploaded to github, this prevents API manager breaking when
+# we run it on a server that may not connect to these sites
+
+# Inline styles loaded by jsoneditor.min.js have been allowed by adding their hashes to CSP_STYLE_SRC
+
+CSP_IMG_SRC = ("'self' data:", 'https://static.openbankproject.com')
+CSP_STYLE_SRC = ("'self' 'sha256-z2a+NIknPDE7NIEqE1lfrnG39eWOhJXWsXHYGGNb5oU=' 'sha256-Dn0vMZLidJplZ4cSlBMg/F5aa7Vol9dBMHzBF4fGEtk=' 'sha256-sA0hymKbXmMTpnYi15KmDw4u6uRdLXqHyoYIaORFtjU=' 'sha256-jUuiwf3ITuJc/jfynxWHLwTZifHIlhddD8NPmmVBztk=' 'sha256-RqzjtXRBqP4i+ruV3IRuHFq6eGIACITqGbu05VSVXsI='", 'https://cdnjs.cloudflare.com', )
+CSP_SCRIPT_SRC = ("'self' 'unsafe-eval' 'sha256-CAykt4V7LQN6lEkjV8hZQx0GV6LTZZGUvQDqamuUq2Q=' 'sha256-4Hr8ttnXaUA4A6o0hGi3NUGNP2Is3Ep0W+rvm+W7BAk=' 'sha256-GgQWQ4Ejk4g9XpAZJ4YxIgZDgp7CdQCmqjMOMh9hD2g=' 'sha256-05NIAwVBHkAzKcXTfkYqTnBPtkpX+AmQvM/raql3qo0='", 'http://code.jquery.com', 'https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/', 'https://cdnjs.cloudflare.com')
+CSP_FONT_SRC = ("'self'", 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/fonts/') 
+CSP_FRAME_ANCESTORS = ("'self'")
+CSP_FORM_ACTION = ("'self'")
+CSP_CONNECT_SRC = ("'self'", API_HOST)

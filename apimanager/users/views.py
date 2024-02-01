@@ -5,7 +5,7 @@ Views of users app
 import datetime
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import FormView, TemplateView, View
 
@@ -23,7 +23,6 @@ class FilterRoleName(BaseFilter):
             e['role_name'] for e in x['entitlements']['list']
         ]]
         return filtered
-
 
 class FilterEmail(BaseFilter):
     """Filter users by email address"""
@@ -100,14 +99,15 @@ class IndexView(LoginRequiredMixin, TemplateView):
                 users = response
         except APIError as err:
             messages.error(self.request, err)
-        except:
-            messages.error(self.request, 'Unknown Error')
+        except Exception as err:
+            messages.error(self.request, err)
 
         role_names = self.get_users_rolenames(context)
         try:
             users = FilterRoleName(context, self.request.GET) \
                 .apply([users] if username else users['users'])
-        except:
+        except Exception as err:
+            messages.error(self.request, err)
             users = []
         context.update({
             'role_names': role_names,
@@ -137,8 +137,8 @@ class DetailView(LoginRequiredMixin, FormView):
             form.fields['bank_id'].choices = self.api.get_bank_id_choices()
         except APIError as err:
             messages.error(self.request, err)
-        except:
-            messages.error(self.request, 'Unknown Error')
+        except Exception as err:
+            messages.error(self.request, err)
         return form
 
     def form_valid(self, form):
@@ -154,8 +154,8 @@ class DetailView(LoginRequiredMixin, FormView):
         except APIError as err:
             messages.error(self.request, err)
             return super(DetailView, self).form_invalid(form)
-        except:
-            messages.error(self.request, 'Unknown Error')
+        except Exception as err:
+            messages.error(self.request, err)
             return super(DetailView, self).form_invalid(form)
         if 'code' in entitlement and entitlement['code']>=400:
             messages.error(self.request, entitlement['message'])
@@ -181,8 +181,8 @@ class DetailView(LoginRequiredMixin, FormView):
                 context['form'].fields['user_id'].initial = user['user_id']
         except APIError as err:
             messages.error(self.request, err)
-        except:
-            messages.error(self.request, 'Unknown Error')
+        except Exception as err:
+            messages.error(self.request, err)
 
         context.update({
             'apiuser': user,  # 'user' is logged-in user in template context
@@ -205,8 +205,8 @@ class MyDetailView(LoginRequiredMixin, FormView):
             form.fields['bank_id'].choices = self.api.get_bank_id_choices()
         except APIError as err:
             messages.error(self.request, err)
-        except:
-            messages.error(self.request, 'Unknown Error')
+        except Exception as err:
+            messages.error(self.request, err)
         return form
 
     def form_valid(self, form):
@@ -229,7 +229,7 @@ class MyDetailView(LoginRequiredMixin, FormView):
             messages.error(self.request, err)
             return super(MyDetailView, self).form_invalid(form)
         except Exception as err:
-            messages.error(self.request, 'Unknown Error. {}'.format(err))
+            messages.error(self.request, err)
             return super(MyDetailView, self).form_invalid(form)
         else:
             return super(MyDetailView, self).form_valid(form)
@@ -246,10 +246,7 @@ class MyDetailView(LoginRequiredMixin, FormView):
         except APIError as err:
             messages.error(self.request, err)
         except Exception as err:
-            messages.error(self.request, 'Unknown Error')
-        #print(user,"This is ")
-        #entitlements=user["entitlements"]["list"]
-        user["entitlements"]["list"] = sorted(user["entitlements"]["list"], key=lambda d: d['role_name'])
+            messages.error(self.request, err)
         context.update({
             'apiuser': user,  # 'user' is logged-in user in template context
         })
@@ -274,8 +271,8 @@ class InvitationView(LoginRequiredMixin, FormView):
             fields['bank_id'].choices = self.api.get_bank_id_choices()
         except APIError as err:
             messages.error(self.request, err)
-        except:
-            messages.error(self.request, "Unknown Error")
+        except Exception as err:
+            messages.error(self.request, err)
         return form
 
     def form_valid(self, form, **kwargs):
@@ -306,7 +303,7 @@ class InvitationView(LoginRequiredMixin, FormView):
             messages.error(self.request, err)
             return super(InvitationView, self).form_invalid(form)
         except Exception as err:
-            messages.error(self.request, "Unknown Error:{}".format(str(err)))
+            messages.error(self.request, err)
             return super(InvitationView, self).form_invalid(form)
 
     def get_invitations(self, context, get_url_path, invitations):
@@ -338,10 +335,10 @@ class DeleteEntitlementView(LoginRequiredMixin, View):
                 messages.success(request, msg)
         except APIError as err:
             messages.error(request, err)
-        except:
-            messages.error(self.request, 'Unknown Error')
+        except Exception as err:
+            messages.error(self.request, err)
 
-        # from sonarcloud: Change this code to not perform redirects based on user-controlled data.    
+        # from sonarcloud: Change this code to not perform redirects based on user-controlled data.
         redirect_url_from_gui = request.POST.get('next', reverse('users-index'))
         if "/users/all/user_id/" in str(redirect_url_from_gui):
             redirect_url = reverse('users-detail',kwargs={"user_id":kwargs['user_id']})
@@ -349,7 +346,6 @@ class DeleteEntitlementView(LoginRequiredMixin, View):
             redirect_url = reverse('my-user-detail',kwargs={"user_id":kwargs['user_id']})
         else:
              redirect_url = reverse('users-index')
-        
         return HttpResponseRedirect(redirect_url)
 
 
@@ -379,7 +375,6 @@ class UserStatusUpdateView(LoginRequiredMixin, View):
             else:
                 urlpath = '/users/{}/lock-status'.format(kwargs['username'])
                 result = api.put(urlpath, None)
-                print("result", result)
                 #if result is not None and 'code' in result and result['code'] >= 400:
                 if 'code' in result and result['code'] == 404:
                     msg = 'User {} has been unlocked.'.format(kwargs['username'])
@@ -392,8 +387,8 @@ class UserStatusUpdateView(LoginRequiredMixin, View):
 
         except APIError as err:
             messages.error(request, err)
-        except Exception as e:
-            messages.error(self.request, 'Unknown Error' + str(e))
+        except Exception as err:
+            messages.error(self.request, err)
 
         # from sonarcloud: Change this code to not perform redirects based on user-controlled data.
         redirect_url_from_gui = request.POST.get('next', reverse('users-index'))
@@ -433,8 +428,8 @@ class ExportCsvView(LoginRequiredMixin, View):
 
         except APIError as err:
             messages.error(self.request, err)
-        except:
-            messages.error(self.request, 'Unknown Error')
+        except Exception as err:
+            messages.error(self.request, err)
         response = HttpResponse(content_type = 'text/csv')
         response['Content-Disposition'] = 'attachment;filename= Users'+ str(datetime.datetime.now())+'.csv'
         writer = csv.writer(response)
@@ -444,3 +439,21 @@ class ExportCsvView(LoginRequiredMixin, View):
                              user['last_marketing_agreement_signed_date']])
         return response
 
+# This below code is not yet working, it is intended to provide a json list of results to feed to jquery-ui autocomplete feature
+
+class AutocompleteFieldView(View):
+    """Autocompletes a Field Form based on what endpoint the field is filtering"""
+    def autocomplete_form_field(self, request, *args, **kwargs):
+        api = API(self.request.session.get('obp'))
+        term = self.request.GET.get('term', '')
+        try:
+            urlpath = '/roles'
+            response = api.get(urlpath)
+            if 'code' in response and response['code'] >= 400:
+                messages.error(self.request, response['message'])
+            else:
+                suggestions = response.json()
+                return JsonResponse(suggestions, safe=False)
+        except APIError as err:
+            messages.error(self.request, err)
+            return [], []
