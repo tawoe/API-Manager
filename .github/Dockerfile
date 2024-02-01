@@ -1,6 +1,6 @@
 FROM python:3.10.13-bookworm
 USER root
-RUN apt-get install -y python3-psycopg2
+RUN apt-get update ; apt-get install -y python3-psycopg2
 ADD . /app
 COPY ./.github/local_settings_container.py /app/apimanager/apimanager/local_settings.py
 COPY ./.github/gunicorn.conf.py /app/gunicorn.conf.py
