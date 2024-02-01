@@ -1,6 +1,6 @@
 FROM python:latest
 USER root
-RUN apt install python3-psycopg2
+RUN apt install -y python3-psycopg2
 ADD . /app
 COPY ./.github/local_settings_container.py /app/apimanager/apimanager/local_settings.py
 COPY ./.github/gunicorn.conf.py /app/gunicorn.conf.py
