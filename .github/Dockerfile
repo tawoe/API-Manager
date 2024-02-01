@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:3.10.13-bookworm
 USER root
 RUN apt-get install -y python3-psycopg2
 ADD . /app
