@@ -1,4 +1,4 @@
-name: build and publish container - develop branch
+name: build and publish container  develop branch
 
 on:
   push:
