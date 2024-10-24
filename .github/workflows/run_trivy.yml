@@ -2,11 +2,8 @@ name: scan container image
 
 on:
   workflow_run:
-    workflows:
-      - build and publish container develop branch
-      - build and publish container non develop branches
-    types:
-      - completed
+    workflows: [build and publish container develop branch, build and publish container non develop branches]
+    types: [completed]
 env:
   ## Sets environment variable
   DOCKER_HUB_ORGANIZATION: ${{ vars.DOCKER_HUB_ORGANIZATION }}
